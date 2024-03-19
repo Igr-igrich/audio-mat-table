@@ -1,0 +1,39 @@
+<table *ngIf="displayedColumns.length > 0">
+    <tr>
+        <th *ngFor="let col of displayedColumns">
+            <ng-container
+                *ngTemplateOutlet="getHeaderTemplate(col) || defaultHeader" 
+            ></ng-container>
+
+            <ng-template #defaultHeader>
+                {{col}}
+            </ng-template>
+        </th>
+    </tr>
+    <tr *ngFor="let row of dataSource" (click)="openSong(row['url'], row['name'])">
+        <td *ngFor="let col of displayedColumns">
+            {{row[col]}}
+        </td>
+    </tr>
+</table>
+
+<ng-container *ngIf="songName" >
+    <p>Now is playing: {{songName}}</p>
+
+    <img 
+        class="button"
+        *ngIf="!isPlay else stop"
+        src='../../../assets/1486348532-music-play-pause-control-go-arrow_80458.svg'
+        (click)="playSong()"
+    >
+
+    <ng-template #stop>
+        <img 
+            class="button"
+            src="../../../assets/pause-button-svgrepo-com.svg"
+            (click)="stopSong()"
+        >
+    </ng-template>
+
+    <input type="range" min="0" max="1" step="0.01" value="0.5" (input)="vol($event)">
+</ng-container>
