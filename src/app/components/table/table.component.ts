@@ -14,6 +14,7 @@ export class TableComponent implements OnInit {
     {url: './assets/song3', name: 'Popular Song'},
   ]
   songName: string | undefined;
+  isPlay: boolean = true;
 
   @Input() dataSource: {[key: string]: any}[] = [];
   @Input() displayedColumns: string[] = [];
@@ -49,10 +50,5 @@ export class TableComponent implements OnInit {
     this.song.volume = volume.target.value;
   }
 
-  isPlay = true;
-
-  // public toggle(track: string) {
-  //     this.isPlay = !this.isPlay;
-  //     this.isPlay ? 'play-button' : 'pause-button'
-  // }
+  
 }
